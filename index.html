@@ -1,1 +1,1035 @@
-<html>xd</html>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atrapa mi corazón ❤️</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Dancing+Script:wght@500;600;700&family=Poppins:wght@400;500;600&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: radial-gradient(circle at top, #512033, #180b14 65%);
+    color: #fff1e8;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+h1, h2 {
+    font-family: 'Cinzel', serif;
+    color: #f5d18a;
+}
+
+.script {
+    font-family: 'Dancing Script', cursive;
+    color: #f5c5d5;
+}
+
+button {
+    border: 1px solid #e6bd77;
+    border-radius: 30px;
+    padding: 13px 25px;
+    background: linear-gradient(135deg, #e8bd78, #a66a38);
+    color: #321322;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 8px;
+}
+
+button:active {
+    transform: scale(.96);
+}
+
+#start {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+}
+
+#start .heart {
+    font-size: 65px;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    50% { transform: scale(1.18); }
+}
+
+#start p {
+    max-width: 430px;
+    line-height: 1.8;
+    color: #f4dce5;
+}
+
+#musicButton {
+    position: fixed;
+    top: 12px;
+    right: 10px;
+    z-index: 20;
+    padding: 9px 13px;
+    font-size: 12px;
+    background: #54243b;
+    color: #ffe7c1;
+}
+
+#game {
+    padding: 65px 12px 25px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.top-info {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+    color: #f7dca5;
+    font-size: 14px;
+}
+
+.game-layout {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 12px;
+}
+
+#gameArea {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    max-width: 650px;
+    border: 2px solid #a87954;
+    border-radius: 18px;
+    overflow: hidden;
+    background: radial-gradient(circle at 50% 15%, #55243d, #1b0c17 75%);
+    box-shadow: 0 0 25px #d18c6233;
+}
+
+#gameCanvas {
+    display: block;
+    width: 100%;
+    height: 430px;
+    touch-action: none;
+}
+
+#cakePanel {
+    width: 190px;
+    min-width: 145px;
+    border: 1px solid #bd9361;
+    border-radius: 18px;
+    background: linear-gradient(160deg, #4b1e34, #24101d);
+    padding: 12px 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#cakePanel h3 {
+    font-family: 'Dancing Script', cursive;
+    color: #f4d18f;
+    font-size: 23px;
+    margin: 4px;
+}
+
+#cake {
+    position: relative;
+    width: 130px;
+    height: 145px;
+    margin: 12px auto;
+    transition: transform 1s;
+}
+
+#cake.big {
+    transform: scale(1.45);
+}
+
+.candle-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 65px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 3px;
+    padding: 0 5px;
+    z-index: 3;
+}
+
+.candle {
+    width: 5px;
+    height: 22px;
+    border-radius: 2px;
+    background: repeating-linear-gradient(45deg, #fff0c9 0 4px, #d77b94 4px 8px);
+    position: relative;
+}
+
+.flame {
+    position: absolute;
+    top: -12px;
+    left: 0;
+    width: 5px;
+    height: 10px;
+    background: #ffd45c;
+    border-radius: 50% 50% 40% 40%;
+    box-shadow: 0 0 8px 3px #ffb52c;
+    animation: flame .6s infinite alternate;
+}
+
+@keyframes flame {
+    from { transform: scale(.85) rotate(-5deg); }
+    to { transform: scale(1.15) rotate(5deg); }
+}
+
+.candle.off .flame {
+    display: none;
+}
+
+.cake-top {
+    position: absolute;
+    bottom: 65px;
+    left: 8px;
+    width: 114px;
+    height: 28px;
+    background: #f3b4c5;
+    border-radius: 50%;
+    border: 3px solid #ffe2ce;
+}
+
+.cake-body {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    width: 106px;
+    height: 65px;
+    border-radius: 10px 10px 17px 17px;
+    background: linear-gradient(90deg, #c46b85, #f2b4c7, #b85c78);
+    border-bottom: 7px solid #f8d8a1;
+}
+
+.cake-drip {
+    position: absolute;
+    bottom: 54px;
+    left: 20px;
+    width: 90px;
+    height: 18px;
+    border-radius: 0 0 15px 15px;
+    background: #fff0d9;
+}
+
+#candleCount {
+    color: #f7dca5;
+    font-size: 13px;
+}
+
+#progress {
+    height: 9px;
+    width: 100%;
+    background: #492338;
+    border-radius: 20px;
+    margin: 12px 0;
+    overflow: hidden;
+}
+
+#progressBar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #d89b54, #ffe5a5);
+    transition: width .3s;
+}
+
+#gameMessage {
+    color: #f5d18a;
+    min-height: 25px;
+    font-size: 14px;
+}
+
+#poemScreen, #finalScreen {
+    min-height: 100vh;
+    padding: 80px 18px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.poem-card {
+    max-width: 480px;
+    width: 100%;
+    border: 1px solid #bd9361;
+    border-radius: 22px;
+    background: linear-gradient(145deg, #4b1d33, #210d1a);
+    padding: 28px 20px;
+    box-shadow: 0 0 35px #e7b36b22;
+}
+
+#poemText {
+    min-height: 110px;
+    white-space: pre-line;
+    line-height: 2;
+    font-family: 'Dancing Script', cursive;
+    font-size: 25px;
+    color: #ffe1e9;
+}
+
+#finalScreen {
+    overflow: hidden;
+}
+
+#bigCake {
+    font-size: 110px;
+    filter: drop-shadow(0 0 20px #ffd37a);
+    animation: pulse 2s infinite;
+}
+
+#blowText {
+    font-family: 'Dancing Script', cursive;
+    font-size: 30px;
+    color: #ffe1b1;
+}
+
+#blowButton {
+    background: linear-gradient(135deg, #f8d99c, #c28a48);
+    font-size: 17px;
+    padding: 16px 28px;
+    touch-action: none;
+}
+
+#finalLetter {
+    max-width: 550px;
+    margin: 25px auto;
+    padding: 25px 20px;
+    border: 1px solid #d8b477;
+    border-radius: 20px;
+    background: linear-gradient(145deg, #4c2035, #210d1a);
+    line-height: 1.9;
+    color: #ffeaf0;
+}
+
+#finalLetter p {
+    white-space: pre-line;
+}
+
+#finalLetter .script {
+    font-size: 24px;
+}
+
+@media(max-width: 560px) {
+    #game {
+        padding-left: 7px;
+        padding-right: 7px;
+    }
+
+    .game-layout {
+        gap: 6px;
+    }
+
+    #cakePanel {
+        width: 115px;
+        min-width: 105px;
+        padding: 6px 2px;
+    }
+
+    #cake {
+        transform: scale(.78);
+        margin: -2px auto;
+    }
+
+    #cake.big {
+        transform: scale(1.45);
+    }
+
+    #cakePanel h3 {
+        font-size: 19px;
+    }
+
+    #gameCanvas {
+        height: 390px;
+    }
+
+    .top-info {
+        font-size: 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop preload="auto">
+    <source src="Reik%20-%20Creo%20En%20Ti%20(Letra_Lyrics)(MP3_160K).mp3" type="audio/mpeg">
+</audio>
+
+<button id="musicButton" onclick="toggleMusic()" hidden>♫ Pausar música</button>
+
+<section id="start">
+    <div class="heart">❤️</div>
+    <h1>Atrapa mi corazón</h1>
+    <h2 class="script">19 niveles para alguien especial</h2>
+    <p>
+        Preparé una pequeña aventura para ti.
+        Atrapa todos los corazones que puedas,
+        descubre cada dedicatoria y acompáñame
+        hasta llegar a una sorpresa.
+    </p>
+    <p class="script">Cada corazón guarda un pedacito de cariño...</p>
+    <button onclick="startGame()">Comenzar aventura ❤️</button>
+</section>
+
+<section id="game" hidden>
+    <h2>Atrapa mi corazón</h2>
+
+    <div class="top-info">
+        <span id="levelInfo">Nivel 1 de 19</span>
+        <span id="scoreInfo">Corazones: 0 / 10</span>
+        <span id="timeInfo">Tiempo: 45 s</span>
+        <span id="livesInfo">Vidas: ❤️❤️❤️❤️❤️</span>
+    </div>
+
+    <div id="progress">
+        <div id="progressBar"></div>
+    </div>
+
+    <div class="game-layout">
+        <div id="gameArea">
+            <canvas id="gameCanvas"></canvas>
+        </div>
+
+        <aside id="cakePanel">
+            <h3>Tu pastel</h3>
+            <div id="cake">
+                <div class="candle-area" id="candles"></div>
+                <div class="cake-top"></div>
+                <div class="cake-drip"></div>
+                <div class="cake-body"></div>
+            </div>
+            <div id="candleCount">0 de 19 velitas</div>
+            <p style="font-size:11px;color:#e9c9d4">Un deseo por cada velita 💗</p>
+        </aside>
+    </div>
+
+    <p id="gameMessage">Mueve la canastita con tu dedo para atrapar los corazones.</p>
+</section>
+
+<section id="poemScreen" hidden>
+    <div class="poem-card">
+        <div style="font-size:42px">💗</div>
+        <h2 id="poemTitle">Nivel completado</h2>
+        <p class="script" id="poemText"></p>
+        <p id="poemCandle" style="color:#f3d59a"></p>
+        <button onclick="continueGame()">Continuar ❤️</button>
+    </div>
+</section>
+
+<section id="finalScreen" hidden>
+    <h1 class="script">¡Lo lograste, mi amor!</h1>
+    <p style="color:#f5dcae">Has conseguido encender las 19 velitas...</p>
+
+    <div id="bigCake">🎂</div>
+
+    <h2 id="blowText">Sopla, mi amor ❤️</h2>
+    <p id="blowInstructions">Mantén presionado el botón para apagar las velitas.</p>
+
+    <button id="blowButton">🌬️ Soplar las velitas</button>
+
+    <div id="finalLetter" hidden>
+        <h1 class="script">Feliz cumpleaños, mi amor ❤️</h1>
+
+        <p>
+Espero que te haya gustado todo lo que preparé para ti.
+No sabes lo mucho que significas para mí, ni lo feliz que me hace tenerte en mi vida.
+
+Hoy quisiera que pudieras verte con mis ojos, para que entendieras lo especial que eres y todo lo bonito que provocas en mí.
+        </p>
+
+        <h2 class="script">Un deseo para ti...</h2>
+
+        <p class="script">
+Si pudiera regalarte las estrellas,
+llenaría tu cielo de luz;
+si pudiera detener el tiempo,
+guardaría cada instante junto a ti.
+
+No necesito un día perfecto,
+ni un mundo lleno de cosas materiales;
+me basta con verte sonreír
+y saber que hoy tienes mil motivos para hacerlo.
+
+Que nunca te falten sueños por cumplir,
+abrazos que te hagan sentir en casa,
+personas que te quieran de verdad
+y momentos que hagan brillar tus ojos.
+
+Y si la vida me permitiera elegir
+entre mil caminos diferentes,
+me gustaría volver a encontrar el tuyo,
+coincidir contigo y elegirte nuevamente.
+        </p>
+
+        <h2 class="script">Porque tú eres especial para mí.</h2>
+
+        <p>
+Gracias por existir, por ser tú y por permitirme compartir momentos contigo.
+Deseo que este nuevo año de tu vida esté lleno de alegría, amor y cosas bonitas.
+        </p>
+
+        <h1 class="script">Feliz cumpleaños, mi amor. 💗</h1>
+        <p style="text-align:center">Con muchísimo cariño, para ti.</p>
+    </div>
+</section>
+  
+<script>
+const music = document.getElementById("music");
+const musicButton = document.getElementById("musicButton");
+
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
+
+const levels = [
+    {target:10, speed:105, spawn:950, time:45},
+    {target:12, speed:112, spawn:900, time:45},
+    {target:14, speed:120, spawn:850, time:45},
+    {target:16, speed:128, spawn:820, time:45},
+    {target:18, speed:137, spawn:780, time:45},
+    {target:20, speed:145, spawn:750, time:45},
+    {target:22, speed:153, spawn:720, time:45},
+    {target:24, speed:162, spawn:690, time:45},
+    {target:26, speed:170, spawn:660, time:45},
+    {target:28, speed:178, spawn:630, time:45},
+    {target:30, speed:185, spawn:610, time:45},
+    {target:32, speed:193, spawn:590, time:45},
+    {target:34, speed:200, spawn:570, time:45},
+    {target:36, speed:208, spawn:550, time:45},
+    {target:38, speed:216, spawn:530, time:45},
+    {target:40, speed:224, spawn:510, time:45},
+    {target:42, speed:232, spawn:490, time:45},
+    {target:44, speed:240, spawn:470, time:45},
+    {target:48, speed:250, spawn:450, time:50}
+];
+
+const poems = [
+`En medio de tantos momentos,
+tu sonrisa tiene algo especial;
+es de esas pequeñas cosas
+que hacen bonito cualquier día.`,
+
+`Hay miradas que dicen mucho
+sin necesidad de hablar;
+la tuya tiene esa magia
+que me invita a soñar.`,
+
+`No sabía que una persona
+podía alegrar tanto mis días,
+hasta que llegaste tú
+con esa forma tan bonita de ser.`,
+
+`Si pudiera guardar un instante,
+elegiría uno junto a ti;
+porque hasta los momentos sencillos
+se vuelven especiales así.`,
+
+`No hacen falta grandes regalos
+para encontrar felicidad;
+a veces basta una sonrisa
+y alguien con quien compartirla.`,
+
+`Me gusta imaginar momentos,
+conversaciones y aventuras;
+porque cuando se trata de ti,
+hasta los planes más simples ilusionan.`,
+
+`Hay personas que llegan
+y dejan huellas sin saberlo;
+tú has dejado en mi corazón
+recuerdos que quiero conservar.`,
+
+`Si alguna vez dudas de lo especial
+que eres para mí,
+recuerda que entre tantas cosas,
+siempre encuentro motivos para pensarte.`,
+
+`Tu forma de ser tiene algo
+que no sabría explicar;
+es como una luz pequeñita
+que consigue destacar.`,
+
+`No prometo días perfectos,
+pero sí cariño de verdad;
+ganas de compartir sonrisas
+y de cuidar lo que nos hace bien.`,
+
+`Qué bonito es coincidir
+en medio de tanta casualidad;
+encontrar a alguien que convierte
+lo cotidiano en algo especial.`,
+
+`Si mis palabras fueran flores,
+hoy te regalaría un jardín;
+una por cada sonrisa tuya
+y otra por hacerme feliz.`,
+
+`Hay momentos que quisiera
+guardar dentro de una canción;
+para volver a sentirlos
+cada vez que los recuerde mi corazón.`,
+
+`Me gusta lo que eres,
+lo que transmites al hablar;
+y esa manera tan tuya
+de hacerme querer estar.`,
+
+`No sé qué traerá mañana,
+pero hay algo que sí sé:
+me alegra que formes parte
+de esta historia que hoy se escribe.`,
+
+`Ojalá la vida te devuelva
+todo lo bonito que das;
+que nunca te falten razones
+para reír y soñar.`,
+
+`Si pudiera pedir un deseo,
+sería verte siempre brillar;
+que nunca pierdas esa esencia
+que te hace tan especial.`,
+
+`Entre miles de pensamientos,
+hay uno que vuelve a mí:
+qué suerte la de mi vida
+por haber coincidido contigo aquí.`,
+
+`Y si hoy pudiera resumir
+todo lo que quiero expresar,
+diría que eres un regalo
+que me encanta poder celebrar.`
+];
+
+let currentLevel = 0;
+let caught = 0;
+let lives = 5;
+let timeLeft = 45;
+let objects = [];
+let basketX = 0;
+let basketY = 0;
+let lastSpawn = 0;
+let lastFrame = 0;
+let timerInterval = null;
+let animationId = null;
+let playing = false;
+let blowing = false;
+let candlesOff = 0;
+
+function resizeCanvas() {
+    const rect = canvas.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    basketX = rect.width / 2;
+    basketY = rect.height - 32;
+}
+
+window.addEventListener("resize", resizeCanvas);
+
+function startGame() {
+    document.getElementById("start").hidden = true;
+    document.getElementById("game").hidden = false;
+    musicButton.hidden = false;
+
+    music.volume = 0.35;
+
+    music.play().then(() => {
+        musicButton.textContent = "♫ Pausar música";
+    }).catch(() => {
+        musicButton.textContent = "♫ Reproducir música";
+    });
+
+    resizeCanvas();
+    startLevel();
+}
+
+function toggleMusic() {
+    if (music.paused) {
+        music.play().then(() => {
+            musicButton.textContent = "♫ Pausar música";
+        }).catch(() => {
+            musicButton.textContent = "♫ Reproducir música";
+        });
+    } else {
+        music.pause();
+        musicButton.textContent = "♫ Reproducir música";
+    }
+}
+
+function startLevel() {
+    const level = levels[currentLevel];
+
+    caught = 0;
+    lives = 5;
+    timeLeft = level.time;
+    objects = [];
+    playing = true;
+    lastSpawn = 0;
+    lastFrame = 0;
+
+    document.getElementById("levelInfo").textContent =
+        `Nivel ${currentLevel + 1} de 19`;
+
+    updateInfo();
+
+    document.getElementById("gameMessage").textContent =
+        "¡Atrapa los corazones! Evita los corazones oscuros.";
+
+    clearInterval(timerInterval);
+
+    timerInterval = setInterval(() => {
+        if (!playing) return;
+
+        timeLeft--;
+        updateInfo();
+
+        if (timeLeft <= 0) {
+            failLevel("¡Se acabó el tiempo! Inténtalo otra vez.");
+        }
+    }, 1000);
+
+    cancelAnimationFrame(animationId);
+    animationId = requestAnimationFrame(gameLoop);
+}
+
+function updateInfo() {
+    const target = levels[currentLevel].target;
+
+    document.getElementById("scoreInfo").textContent =
+        `Corazones: ${caught} / ${target}`;
+
+    document.getElementById("timeInfo").textContent =
+        `Tiempo: ${timeLeft} s`;
+
+    document.getElementById("livesInfo").textContent =
+        "Vidas: " + "❤️".repeat(lives);
+
+    document.getElementById("progressBar").style.width =
+        Math.min(100, caught / target * 100) + "%";
+}
+
+function spawnObject() {
+    const w = canvas.getBoundingClientRect().width;
+    const rand = Math.random();
+
+    let type = "heart";
+    let symbol = "❤️";
+    let points = 1;
+
+    if (rand < 0.17) {
+        type = "gold";
+        symbol = "💛";
+        points = 3;
+    } else if (rand > 0.78 && currentLevel >= 5) {
+        type = "bad";
+        symbol = "💔";
+        points = -1;
+    }
+
+    objects.push({
+        x: 22 + Math.random() * (w - 44),
+        y: -30,
+        type,
+        symbol,
+        points
+    });
+}
+
+function gameLoop(timestamp) {
+    if (!playing) return;
+
+    const width = canvas.getBoundingClientRect().width;
+    const height = canvas.getBoundingClientRect().height;
+
+    const delta = lastFrame
+        ? Math.min((timestamp - lastFrame) / 1000, 0.04)
+        : 0;
+
+    lastFrame = timestamp;
+
+    ctx.clearRect(0, 0, width, height);
+
+    for (let i = 0; i < 18; i++) {
+        const x = (i * 73 + 30) % width;
+        const y = (i * 97 + timestamp * 0.012) % height;
+
+        ctx.fillStyle = "rgba(255,220,180,0.35)";
+        ctx.beginPath();
+        ctx.arc(x, y, 1.3, 0, Math.PI * 2);
+        ctx.fill();
+    }
+
+    const level = levels[currentLevel];
+
+    if (timestamp - lastSpawn > level.spawn) {
+        spawnObject();
+        lastSpawn = timestamp;
+    }
+
+    for (let i = objects.length - 1; i >= 0; i--) {
+        const obj = objects[i];
+
+        obj.y += level.speed * delta;
+
+        ctx.font = "29px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText(obj.symbol, obj.x, obj.y);
+
+        if (
+            obj.y > basketY - 27 &&
+            obj.y < basketY + 18 &&
+            Math.abs(obj.x - basketX) < 42
+        ) {
+            if (obj.type === "bad") {
+                lives--;
+            } else {
+                caught += obj.points;
+            }
+
+            objects.splice(i, 1);
+            updateInfo();
+
+            if (caught >= level.target) {
+                completeLevel();
+                return;
+            }
+
+            if (lives <= 0) {
+                failLevel("¡Te quedaste sin vidas! Puedes volver a intentarlo.");
+                return;
+            }
+
+            continue;
+        }
+
+        if (obj.y > height + 35) {
+            objects.splice(i, 1);
+        }
+    }
+
+    ctx.font = "43px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText("🧺", basketX, basketY + 12);
+
+    animationId = requestAnimationFrame(gameLoop);
+}
+
+function moveBasket(event) {
+    if (!playing) return;
+
+    const rect = canvas.getBoundingClientRect();
+
+    basketX = Math.max(
+        25,
+        Math.min(rect.width - 25, event.clientX - rect.left)
+    );
+}
+
+canvas.addEventListener("pointerdown", moveBasket);
+canvas.addEventListener("pointermove", moveBasket);
+
+function completeLevel() {
+    playing = false;
+
+    clearInterval(timerInterval);
+    cancelAnimationFrame(animationId);
+
+    const candleNumber = currentLevel + 1;
+
+    addCandle(candleNumber);
+
+    document.getElementById("game").hidden = true;
+    document.getElementById("poemScreen").hidden = false;
+
+    document.getElementById("poemTitle").textContent =
+        `¡Nivel ${candleNumber} completado!`;
+
+    document.getElementById("poemText").textContent =
+        poems[currentLevel];
+
+    document.getElementById("poemCandle").textContent =
+        `🕯️ Una velita más para tu pastel (${candleNumber} de 19)`;
+}
+
+function addCandle(number) {
+    const area = document.getElementById("candles");
+
+    const candle = document.createElement("div");
+    candle.className = "candle";
+    candle.innerHTML = '<div class="flame"></div>';
+
+    area.appendChild(candle);
+
+    document.getElementById("candleCount").textContent =
+        `${number} de 19 velitas`;
+}
+
+function continueGame() {
+    document.getElementById("poemScreen").hidden = true;
+
+    currentLevel++;
+
+    if (currentLevel >= 19) {
+        showFinal();
+    } else {
+        document.getElementById("game").hidden = false;
+        startLevel();
+    }
+}
+
+function failLevel(message) {
+    playing = false;
+
+    clearInterval(timerInterval);
+    cancelAnimationFrame(animationId);
+
+    document.getElementById("gameMessage").textContent = message;
+
+    const retry = document.createElement("button");
+
+    retry.textContent = "Intentar de nuevo ❤️";
+
+    retry.onclick = () => {
+        retry.remove();
+        startLevel();
+    };
+
+    document.getElementById("gameArea").appendChild(retry);
+}
+
+function showFinal() {
+    document.getElementById("game").hidden = true;
+    document.getElementById("poemScreen").hidden = true;
+    document.getElementById("finalScreen").hidden = false;
+
+    document.getElementById("cake").classList.add("big");
+
+    document.getElementById("blowButton").addEventListener(
+        "pointerdown", startBlowing
+    );
+
+    document.getElementById("blowButton").addEventListener(
+        "pointerup", stopBlowing
+    );
+
+    document.getElementById("blowButton").addEventListener(
+        "pointerleave", stopBlowing
+    );
+
+    document.getElementById("blowButton").addEventListener(
+        "pointercancel", stopBlowing
+    );
+}
+
+let blowInterval = null;
+
+function startBlowing(event) {
+    event.preventDefault();
+
+    if (blowing || candlesOff >= 19) return;
+
+    blowing = true;
+
+    document.getElementById("blowText").textContent =
+        "¡Sopla, mi amor! 🌬️";
+
+    blowInterval = setInterval(() => {
+        if (!blowing) return;
+
+        const candles = document.querySelectorAll("#candles .candle");
+
+        if (candlesOff < candles.length) {
+            candles[candlesOff].classList.add("off");
+            candlesOff++;
+        }
+
+        if (candlesOff >= 19) {
+            stopBlowing();
+            finishBirthday();
+        }
+    }, 250);
+}
+
+function stopBlowing() {
+    blowing = false;
+    clearInterval(blowInterval);
+}
+
+function finishBirthday() {
+    document.getElementById("blowText").textContent =
+        "¡Feliz cumpleaños, mi amor! ❤️";
+
+    document.getElementById("blowInstructions").textContent =
+        "Tu deseo ya está en camino...";
+
+    document.getElementById("blowButton").hidden = true;
+
+    setTimeout(() => {
+        document.getElementById("finalLetter").hidden = false;
+
+        document.getElementById("finalLetter").scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    }, 1300);
+
+    createConfetti();
+}
+
+function createConfetti() {
+    for (let i = 0; i < 35; i++) {
+        const heart = document.createElement("div");
+
+        heart.textContent = Math.random() > 0.5 ? "❤️" : "✨";
+
+        heart.style.position = "fixed";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.top = "-30px";
+        heart.style.fontSize = (15 + Math.random() * 20) + "px";
+        heart.style.pointerEvents = "none";
+        heart.style.zIndex = "50";
+        heart.style.transition = "transform 4s linear, top 4s linear";
+
+        document.body.appendChild(heart);
+
+        requestAnimationFrame(() => {
+            heart.style.top = "105vh";
+            heart.style.transform =
+                `rotate(${Math.random() * 500}deg)`;
+        });
+
+        setTimeout(() => heart.remove(), 4500);
+    }
+}
+</script>
+
+</body>
+</html> 
